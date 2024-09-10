@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  namespace: three-tier
+  namespace: mern
   name: mongodb
 spec: 
   replicas: 1
@@ -14,7 +14,7 @@ spec:
         app: mongodb
     spec: 
       containers:
-      - name: mon
+      - name: mongo-con
         image: mongo:4.4.6
         command:
             - "numactl"

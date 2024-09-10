@@ -2,12 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: api
-  namespace: three-tier
+  namespace: mern
   labels: 
     role: api
     env: demo
 spec: 
-  replicas: 2
+  replicas: 1
   strategy: 
     type: RollingUpdate
     rollingUpdate:
@@ -25,8 +25,8 @@ spec:
       - name: ecr-registry-secret
       containers:
       - name: api
-        image: 407622020962.dkr.ecr.us-east-1.amazonaws.com/backend:latest
-        imagePullPolicy: Always
+        image: charanreddy12/todo-backend:latest
+        #imagePullPolicy: Always
         env:
           - name: MONGO_CONN_STR
             value: mongodb://mongodb-svc:27017/todo?directConnection=true
@@ -41,7 +41,7 @@ spec:
                 name: mongo-sec
                 key: password
         ports:
-        - containerPort: 3500
+        - containerPort: 8080
         livenessProbe: 
           httpGet:
             path: /ok
